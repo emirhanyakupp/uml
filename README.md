@@ -1,9 +1,15 @@
 ```mermaid
 classDiagram
-    class Main {
-        + main(String[] args) void
+    class ShortestRoute {
+        + findFastRoute(int[] start, List~int[]~ coins, PathFinder pf) FastResult
+        + getCoinIndicesInRoute(List~int[]~ route, List~int[]~ originalCoins) List~Integer~
     }
 
-    Main --> Tile : uses
-    Main --> PathFinder : uses
-    Main --> StdDraw : uses
+    class FastResult {
+        + List~int[]~ coinOrder
+        + double totalCost
+        + FastResult(List~int[]~ coinOrder, double totalCost)
+    }
+
+    ShortestRoute --> FastResult
+    ShortestRoute --> PathFinder

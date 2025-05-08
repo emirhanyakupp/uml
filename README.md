@@ -1,15 +1,23 @@
 ```mermaid
 classDiagram
-    class ShortestRoute {
-        + findFastRoute(int[] start, List~int[]~ coins, PathFinder pf) FastResult
-        + getCoinIndicesInRoute(List~int[]~ route, List~int[]~ originalCoins) List~Integer~
+    class Tile {
+        - int type
+        + Tile(int column, int row, int type)
+        + isPassable() boolean
+        + getType() int
+        + loadMap(String filename) Tile[][]
+        + readStartAndCoins(String filename, ArrayList~int[]~ coins) int[]
+        + readTravelCosts(String filename) Map~String, Double~
+        + drawBaseMap(Tile[][] map, int cols, int rows, ArrayList~int[]~ coins) void
+        + drawKnight(int x, int y, int rows) void
+        + selectDifferentColor(Random rand, Color currentColor) Color
     }
 
-    class FastResult {
-        + List~int[]~ coinOrder
-        + double totalCost
-        + FastResult(List~int[]~ coinOrder, double totalCost)
+    class ColoredPoint {
+        - int[] point
+        - Color color
+        + ColoredPoint(int[] point, Color color)
     }
 
-    ShortestRoute --> FastResult
-    ShortestRoute --> PathFinder
+    Tile --> ColoredPoint
+    Tile --> StdDraw : uses
